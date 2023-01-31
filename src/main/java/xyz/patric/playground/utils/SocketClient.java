@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023.
- * @author Patrick Mutwiri on 1/31/23, 6:01 PM
+ * @author Patrick Mutwiri on 1/31/23, 6:33 PM
  */
 
 package xyz.patric.playground.utils;
@@ -11,23 +11,13 @@ import com.google.code.tempusfugit.concurrency.annotations.Concurrent;
 import com.google.code.tempusfugit.concurrency.annotations.Repeating;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Rule;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Service
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Log4j2
 public class SocketClient {
-    @Autowired
-    Environment e;
-
     @Rule
     public ConcurrentRule concurrently = new ConcurrentRule();
 
@@ -52,12 +42,12 @@ public class SocketClient {
 
             // write
             w.write(payload);
-            w.write("\r\n");
+//            w.write("\r\n");
             w.flush();
 
             // read response
             while ((line = r.readLine()) != null) {
-                log.debug("Line: {} ", line);
+                log.info("Line: {} ", line);
                 resp = line;
             }
         } catch (IOException e) {
@@ -73,6 +63,6 @@ public class SocketClient {
     @Repeating(repetition = 10)
     public void runsMultipleTimes() {
         counter.getAndIncrement();
-        log.debug("Counter: {} ", counter);
+        log.info("Counter: {} ", counter);
     }
 }
