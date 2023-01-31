@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023.
- * @author Patrick Mutwiri on 1/31/23, 6:01 PM
+ * @author Patrick Mutwiri on 1/31/23, 6:16 PM
  */
 
 package xyz.patric.playground.controllers;
@@ -17,7 +17,7 @@ public class PlaygroundController {
     @Autowired
     LetsPlay letsPlay;
 
-    @PostMapping("run")
+    @PostMapping("/run/{mode}")
     public ResponseEntity<String> request(@PathVariable Enums.MODE mode, @RequestBody String payload) {
         String response = letsPlay.fireRequest(mode, payload);
         return ResponseEntity.ok(response);

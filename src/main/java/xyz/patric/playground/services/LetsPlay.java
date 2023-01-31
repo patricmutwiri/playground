@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2023.
- * @author Patrick Mutwiri on 1/31/23, 6:01 PM
+ * @author Patrick Mutwiri on 1/31/23, 6:16 PM
  */
 
 package xyz.patric.playground.services;
@@ -34,9 +34,9 @@ public class LetsPlay {
                 String[] socketAddress = address.split(":");
                 String ip = socketAddress[0];
                 int port = Integer.parseInt(socketAddress[1]);
-                response.append(String.format("%s:%s /Request: %s",ip, port,payload));
+                response.append(String.format("%s:%s /Request: %s\n",ip, port,payload));
                 String res = socketClient.initConnect(ip, port, payload);
-                response.append(String.format("%s:%s /Response: %s",ip, port,res));
+                response.append(String.format("%s:%s /Response: %s\n",ip, port,res));
             }
         } else if (mode.equals(Enums.MODE.HTTP)) {
             log.debug("Fire HTTP requests. ");
